@@ -8,22 +8,19 @@ use SertxuDeveloper\Pagination\UrlWindow;
 
 class UrlWindowTest extends TestCase
 {
-    public function testPresenterCanDetermineIfThereAreAnyPagesToShow()
-    {
+    public function testPresenterCanDetermineIfThereAreAnyPagesToShow() {
         $p = new Paginator($array = ['item1', 'item2', 'item3', 'item4'], 4, 2, 2);
         $window = new UrlWindow($p);
         $this->assertTrue($window->hasPages());
     }
 
-    public function testPresenterCanGetAUrlRangeForASmallNumberOfUrls()
-    {
+    public function testPresenterCanGetAUrlRangeForASmallNumberOfUrls() {
         $p = new Paginator($array = ['item1', 'item2', 'item3', 'item4'], 4, 2, 2);
         $window = new UrlWindow($p);
         $this->assertEquals(['first' => [1 => '/?page=1', 2 => '/?page=2'], 'slider' => null, 'last' => null], $window->get());
     }
 
-    public function testPresenterCanGetAUrlRangeForAWindowOfLinks()
-    {
+    public function testPresenterCanGetAUrlRangeForAWindowOfLinks() {
         $array = [];
         for ($i = 1; $i <= 20; $i++) {
             $array[$i] = 'item'.$i;
@@ -66,8 +63,7 @@ class UrlWindowTest extends TestCase
         ], $window->get());
     }
 
-    public function testCustomUrlRangeForAWindowOfLinks()
-    {
+    public function testCustomUrlRangeForAWindowOfLinks() {
         $array = [];
         for ($i = 1; $i <= 20; $i++) {
             $array[$i] = 'item'.$i;
@@ -84,12 +80,11 @@ class UrlWindowTest extends TestCase
                 9 => '/?page=9',
             ],
             'slider' => null,
-            'last' => null
+            'last' => null,
         ], $window->get());
     }
 
-    public function testPresenterCanGetAUrlRangeTooCloseToBeginning()
-    {
+    public function testPresenterCanGetAUrlRangeTooCloseToBeginning() {
         $p = new Paginator($array = ['item5', 'item6', 'item7', 'item8'], 40, 4, 2);
         $window = new UrlWindow($p);
 
@@ -102,12 +97,11 @@ class UrlWindowTest extends TestCase
                 5 => '/?page=5',
             ],
             'slider' => null,
-            'last' => null
+            'last' => null,
         ], $window->get());
     }
 
-    public function testPresenterCanGetAUrlRangeTooCloseToEnding()
-    {
+    public function testPresenterCanGetAUrlRangeTooCloseToEnding() {
         $p = new Paginator($array = ['item5', 'item6', 'item7', 'item8'], 40, 4, 9);
         $window = new UrlWindow($p);
 
@@ -120,12 +114,11 @@ class UrlWindowTest extends TestCase
                 10 => '/?page=10',
             ],
             'slider' => null,
-            'last' => null
+            'last' => null,
         ], $window->get());
     }
 
-    public function testPreventsDisplayingSliderIfNoPagesAvailable()
-    {
+    public function testPreventsDisplayingSliderIfNoPagesAvailable() {
         $p = new Paginator($array = ['item1', 'item2', 'item3', 'item4'], count($array), 4, 1);
         $p->onEachSide(0);
         $window = new UrlWindow($p);
@@ -133,7 +126,7 @@ class UrlWindowTest extends TestCase
         $this->assertEquals([
             'first' => null,
             'slider' => null,
-            'last' => null
+            'last' => null,
         ], $window->get());
     }
 }

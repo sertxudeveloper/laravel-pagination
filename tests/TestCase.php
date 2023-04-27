@@ -2,14 +2,11 @@
 
 namespace SertxuDeveloper\Pagination\Tests;
 
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SertxuDeveloper\Pagination\PaginationServiceProvider;
 use SertxuDeveloper\Pagination\Tests\Models\User;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class TestCase extends Orchestra
 {

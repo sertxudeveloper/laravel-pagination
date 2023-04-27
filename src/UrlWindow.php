@@ -8,40 +8,29 @@ class UrlWindow
 {
     /**
      * The paginator implementation.
-     *
-     * @var PaginatorContract
      */
     protected PaginatorContract $paginator;
 
     /**
      * Create a new URL window instance.
      *
-     * @param PaginatorContract $paginator
      * @return void
      */
-    public function __construct(PaginatorContract $paginator)
-    {
+    public function __construct(PaginatorContract $paginator) {
         $this->paginator = $paginator;
     }
 
     /**
      * Create a new URL window instance.
-     *
-     * @param PaginatorContract $paginator
-     * @return array
      */
-    public static function make(PaginatorContract $paginator): array
-    {
+    public static function make(PaginatorContract $paginator): array {
         return (new static($paginator))->get();
     }
 
     /**
      * Get the window of URLs to be shown.
-     *
-     * @return array
      */
-    public function get(): array
-    {
+    public function get(): array {
         $onEachSide = $this->paginator->onEachSide;
 
         if ($this->paginator->lastPage() < ($onEachSide * 2)) {
@@ -53,21 +42,15 @@ class UrlWindow
 
     /**
      * Get the last page from the paginator.
-     *
-     * @return int
      */
-    protected function lastPage(): int
-    {
+    protected function lastPage(): int {
         return $this->paginator->lastPage();
     }
 
     /**
      * Get the slider of URLs there are not enough pages to slide.
-     *
-     * @return array
      */
-    protected function getSmallSlider(): array
-    {
+    protected function getSmallSlider(): array {
         return [
             'first' => $this->paginator->getUrlRange(1, $this->lastPage()),
             'slider' => null,
@@ -77,12 +60,8 @@ class UrlWindow
 
     /**
      * Create a URL slider links.
-     *
-     * @param int $onEachSide
-     * @return array
      */
-    protected function getUrlSlider(int $onEachSide): array
-    {
+    protected function getUrlSlider(int $onEachSide): array {
         if (!$this->hasPages()) {
             return ['first' => null, 'slider' => null, 'last' => null];
         }
@@ -109,32 +88,22 @@ class UrlWindow
 
     /**
      * Determine if the underlying paginator being presented has pages to show.
-     *
-     * @return bool
      */
-    public function hasPages(): bool
-    {
+    public function hasPages(): bool {
         return $this->paginator->lastPage() > 1;
     }
 
     /**
      * Get the current page from the paginator.
-     *
-     * @return int
      */
-    protected function currentPage(): int
-    {
+    protected function currentPage(): int {
         return $this->paginator->currentPage();
     }
 
     /**
      * Get the slider of URLs when too close to the beginning of the window.
-     *
-     * @param int $onEachSide
-     * @return array
      */
-    protected function getSliderTooCloseToBeginning(int $onEachSide): array
-    {
+    protected function getSliderTooCloseToBeginning(int $onEachSide): array {
         return [
             'first' => $this->paginator->getUrlRange(start: 1, end: $onEachSide * 2 + 1),
             'slider' => null,
@@ -144,12 +113,8 @@ class UrlWindow
 
     /**
      * Get the slider of URLs when too close to the ending of the window.
-     *
-     * @param int $onEachSide
-     * @return array
      */
-    protected function getSliderTooCloseToEnding(int $onEachSide): array
-    {
+    protected function getSliderTooCloseToEnding(int $onEachSide): array {
         $start = $this->lastPage() - ($onEachSide * 2);
 
         return [
@@ -161,12 +126,8 @@ class UrlWindow
 
     /**
      * Get the slider of URLs when a full slider can be made.
-     *
-     * @param int $onEachSide
-     * @return array
      */
-    protected function getFullSlider(int $onEachSide): array
-    {
+    protected function getFullSlider(int $onEachSide): array {
         return [
             'first' => $this->getAdjacentUrlRange($onEachSide),
             'slider' => null,
@@ -176,12 +137,8 @@ class UrlWindow
 
     /**
      * Get the page range for the current page window.
-     *
-     * @param int $onEachSide
-     * @return array
      */
-    public function getAdjacentUrlRange(int $onEachSide): array
-    {
+    public function getAdjacentUrlRange(int $onEachSide): array {
         return $this->paginator->getUrlRange(
             $this->currentPage() - $onEachSide,
             $this->currentPage() + $onEachSide

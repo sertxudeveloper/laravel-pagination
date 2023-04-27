@@ -15,11 +15,8 @@ class Paginator extends IlluminateLengthAwarePaginator
 
     /**
      * Get the array of elements to pass to the view.
-     *
-     * @return array
      */
-    protected function elements(): array
-    {
+    protected function elements(): array {
         $window = UrlWindow::make($this);
 
         return array_filter([
