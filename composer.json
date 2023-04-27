@@ -1,0 +1,55 @@
+{
+    "name": "sertxudeveloper/laravel-pagination",
+    "description": "Package for overriding Laravel's default pagination",
+    "keywords": [
+        "sertxudeveloper",
+        "laravel",
+        "laravel-pagination"
+    ],
+    "homepage": "https://github.com/sertxudeveloper/laravel-pagination",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergio Peris",
+            "email": "dev.sertxu@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.5|^10.0",
+        "illuminate/database": "^9.5|^10.0",
+        "illuminate/support": "^9.5|^10.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.5|^8.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SertxuDeveloper\\Pagination\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SertxuDeveloper\\Pagination\\Tests\\": "tests",
+            "SertxuDeveloper\\Pagination\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SertxuDeveloper\\Pagination\\PaginationServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
