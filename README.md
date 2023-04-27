@@ -1,33 +1,23 @@
 
-<p align="center"><img src="/art/socialcard.png" alt="Laravel Lock Screen by Sertxu Developer"></p>
+<p align="center"><img src="/art/socialcard.png" alt="Laravel Pagination by Sertxu Developer"></p>
 
-# Add a lock screen to your Laravel app
+# Opinionated custom Laravel pagination
 
-![](https://img.shields.io/github/v/release/sertxudeveloper/laravel-lockscreen) ![](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml/badge.svg) ![](https://img.shields.io/github/license/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/github/repo-size/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/github/issues/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/packagist/php-v/sertxudeveloper/laravel-lockscreen) [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-lockscreen)](https://app.codecov.io/gh/sertxudeveloper/laravel-lockscreen)
+![](https://img.shields.io/github/v/release/sertxudeveloper/laravel-pagination) ![](https://github.com/sertxudeveloper/laravel-pagination/actions/workflows/run-tests.yml/badge.svg) ![](https://img.shields.io/github/license/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/repo-size/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/issues/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/php-v/sertxudeveloper/laravel-pagination) [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-pagination)](https://app.codecov.io/gh/sertxudeveloper/laravel-pagination)
 
-This packages adds the functionality to add a lock screen in your app.
-
-The users will be required to re-enter the password once the session has timed out due to inactivity.
+This package modifies the default Laravel pagination to make it smaller when a lot of pages are available.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require sertxudeveloper/laravel-lockscreen
-```
-
-Next, you should run the installation command:
-
-```bash
-php artisan lockscreen:install
+composer require sertxudeveloper/laravel-pagination
 ```
 
 ## Usage
 
-Once you have installed the package, you're users will be redirected to the `locked` route once the session has expired.
-
-In the configuration file you can specify how much time the user can be inactive before locking it's account.
+Once the package is installed, it will automatically replace the default Laravel pagination.
 
 ## Testing
 
@@ -55,4 +45,4 @@ Please review [our security policy](../../security/policy) on how to report secu
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 <br><br>
-<p align="center">Copyright © 2022 Sertxu Developer</p>
+<p align="center">Copyright © 2023 Sertxu Developer</p>
