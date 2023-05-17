@@ -19,7 +19,7 @@ class PaginationServiceProvider extends ServiceProvider
      * Define the asset publishing configuration.
      */
     public function defineAssetPublishing(): void {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'pagination');
+        $this->loadViewsFrom(dirname(__DIR__).'/resources/views', 'pagination');
     }
 
     /**
@@ -38,7 +38,7 @@ class PaginationServiceProvider extends ServiceProvider
     protected function offerPublishing(): void {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/pagination'),
+                dirname(__DIR__).'/resources/views' => resource_path('views/vendor/pagination'),
             ], ['views', 'pagination-views']);
         }
     }
