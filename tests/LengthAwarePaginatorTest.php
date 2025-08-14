@@ -19,14 +19,14 @@ class LengthAwarePaginatorTest extends TestCase
         unset($this->p);
     }
 
-    public function testLengthAwarePaginatorGetAndSetPageName() {
+    public function test_length_aware_paginator_get_and_set_page_name() {
         $this->assertSame('page', $this->p->getPageName());
 
         $this->p->setPageName('p');
         $this->assertSame('p', $this->p->getPageName());
     }
 
-    public function testLengthAwarePaginatorCanGiveMeRelevantPageInformation() {
+    public function test_length_aware_paginator_can_give_me_relevant_page_information() {
         $this->assertEquals(2, $this->p->lastPage());
         $this->assertEquals(2, $this->p->currentPage());
         $this->assertTrue($this->p->hasPages());
@@ -34,7 +34,7 @@ class LengthAwarePaginatorTest extends TestCase
         $this->assertEquals(['item1', 'item2', 'item3', 'item4'], $this->p->items());
     }
 
-    public function testLengthAwarePaginatorSetCorrectInformationWithNoItems() {
+    public function test_length_aware_paginator_set_correct_information_with_no_items() {
         $paginator = new Paginator([], 0, 2, 1);
 
         $this->assertEquals(1, $paginator->lastPage());
@@ -44,7 +44,7 @@ class LengthAwarePaginatorTest extends TestCase
         $this->assertEmpty($paginator->items());
     }
 
-    public function testLengthAwarePaginatorisOnFirstAndLastPage() {
+    public function test_length_aware_paginatoris_on_first_and_last_page() {
         $paginator = new Paginator(['1', '2', '3', '4'], 4, 2, 2);
 
         $this->assertTrue($paginator->onLastPage());
@@ -56,7 +56,7 @@ class LengthAwarePaginatorTest extends TestCase
         $this->assertTrue($paginator->onFirstPage());
     }
 
-    public function testLengthAwarePaginatorCanGenerateUrls() {
+    public function test_length_aware_paginator_can_generate_urls() {
         $this->p->setPath('http://website.com');
         $this->p->setPageName('foo');
 
@@ -81,7 +81,7 @@ class LengthAwarePaginatorTest extends TestCase
         );
     }
 
-    public function testLengthAwarePaginatorCanGenerateUrlsWithQuery() {
+    public function test_length_aware_paginator_can_generate_urls_with_query() {
         $this->p->setPath('http://website.com?sort_by=date');
         $this->p->setPageName('foo');
 
@@ -91,7 +91,7 @@ class LengthAwarePaginatorTest extends TestCase
         );
     }
 
-    public function testLengthAwarePaginatorCanGenerateUrlsWithoutTrailingSlashes() {
+    public function test_length_aware_paginator_can_generate_urls_without_trailing_slashes() {
         $this->p->setPath('http://website.com/test');
         $this->p->setPageName('foo');
 
@@ -111,7 +111,7 @@ class LengthAwarePaginatorTest extends TestCase
         );
     }
 
-    public function testLengthAwarePaginatorCorrectlyGenerateUrlsWithQueryAndSpaces() {
+    public function test_length_aware_paginator_correctly_generate_urls_with_query_and_spaces() {
         $this->p->setPath('http://website.com?key=value%20with%20spaces');
         $this->p->setPageName('foo');
 
@@ -121,7 +121,7 @@ class LengthAwarePaginatorTest extends TestCase
         );
     }
 
-    public function testItRetrievesThePaginatorOptions() {
+    public function test_it_retrieves_the_paginator_options() {
         $this->assertSame($this->options, $this->p->getOptions());
     }
 }

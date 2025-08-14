@@ -6,7 +6,7 @@ use SertxuDeveloper\Pagination\Paginator;
 
 class PaginatorTest extends TestCase
 {
-    public function testSimplePaginatorReturnsRelevantContextInformation() {
+    public function test_simple_paginator_returns_relevant_context_information() {
         $p = new Paginator(['item3', 'item4'], total: 5, perPage: 2, currentPage: 2);
 
         $this->assertEquals(2, $p->currentPage());
@@ -59,31 +59,31 @@ class PaginatorTest extends TestCase
         $this->assertEquals($pageInfo, $p->toArray());
     }
 
-    public function testPaginatorRemovesTrailingSlashes() {
+    public function test_paginator_removes_trailing_slashes() {
         $p = new Paginator(['item1', 'item2', 'item3'], total: 5, perPage: 2, currentPage: 2, options: ['path' => 'http://website.com/test/']);
 
         $this->assertSame('http://website.com/test?page=1', $p->previousPageUrl());
     }
 
-    public function testPaginatorGeneratesUrlsWithoutTrailingSlash() {
+    public function test_paginator_generates_urls_without_trailing_slash() {
         $p = new Paginator(['item1', 'item2', 'item3'], total: 5, perPage: 2, currentPage: 2, options: ['path' => 'http://website.com/test']);
 
         $this->assertSame('http://website.com/test?page=1', $p->previousPageUrl());
     }
 
-    public function testItRetrievesThePaginatorOptions() {
+    public function test_it_retrieves_the_paginator_options() {
         $p = new Paginator(['item1', 'item2', 'item3'], total: 5, perPage: 2, currentPage: 2, options: ['path' => 'http://website.com/test']);
 
         $this->assertSame(['path' => 'http://website.com/test'], $p->getOptions());
     }
 
-    public function testPaginatorReturnsPath() {
+    public function test_paginator_returns_path() {
         $p = new Paginator(['item1', 'item2', 'item3'], total: 5, perPage: 2, currentPage: 2, options: ['path' => 'http://website.com/test']);
 
         $this->assertSame('http://website.com/test', $p->path());
     }
 
-    public function testCanTransformPaginatorItems() {
+    public function test_can_transform_paginator_items() {
         $p = new Paginator(['item1', 'item2', 'item3'], total: 5, perPage: 2, currentPage: 2, options: ['path' => 'http://website.com/test']);
 
         $p->through(function ($item) {
