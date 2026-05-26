@@ -2,8 +2,6 @@
 
 namespace SertxuDeveloper\Pagination\Tests;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SertxuDeveloper\Pagination\PaginationServiceProvider;
 use SertxuDeveloper\Pagination\Tests\Models\User;
