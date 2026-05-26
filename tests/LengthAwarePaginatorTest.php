@@ -1,127 +1,91 @@
 <?php
 
-namespace SertxuDeveloper\Pagination\Tests;
-
 use SertxuDeveloper\Pagination\Paginator;
 
-class LengthAwarePaginatorTest extends TestCase
-{
-    private Paginator $p;
+beforeEach(function () {
+    $this->opts = ['onEachSide' => 5];
+    $this->p = new Paginator(['item1', 'item2', 'item3', 'item4'], 4, 2, 2, $this->opts);
+});
 
-    private array $options;
+afterEach(function () {
+    unset($this->p);
+});
 
-    protected function setUp(): void {
-        $this->options = ['onEachSide' => 5];
-        $this->p = new Paginator($array = ['item1', 'item2', 'item3', 'item4'], 4, 2, 2, $this->options);
-    }
+test('length aware paginator get and set page name', function () {
+    expect($this->p->getPageName())->toBe('page');
 
-    protected function tearDown(): void {
-        unset($this->p);
-    }
+    $this->p->setPageName('p');
+    expect($this->p->getPageName())->toBe('p');
+});
 
-    public function test_length_aware_paginator_get_and_set_page_name() {
-        $this->assertSame('page', $this->p->getPageName());
+test('length aware paginator can give me relevant page information', function () {
+    expect($this->p->lastPage())->toBe(2);
+    expect($this->p->currentPage())->toBe(2);
+    expect($this->p->hasPages())->toBeTrue();
+    expect($this->p->hasMorePages())->toBeFalse();
+    expect($this->p->items())->toBe(['item1', 'item2', 'item3', 'item4']);
+});
 
-        $this->p->setPageName('p');
-        $this->assertSame('p', $this->p->getPageName());
-    }
+test('length aware paginator set correct information with no items', function () {
+    $paginator = new Paginator([], 0, 2, 1);
 
-    public function test_length_aware_paginator_can_give_me_relevant_page_information() {
-        $this->assertEquals(2, $this->p->lastPage());
-        $this->assertEquals(2, $this->p->currentPage());
-        $this->assertTrue($this->p->hasPages());
-        $this->assertFalse($this->p->hasMorePages());
-        $this->assertEquals(['item1', 'item2', 'item3', 'item4'], $this->p->items());
-    }
+    expect($paginator->lastPage())->toBe(1);
+    expect($paginator->currentPage())->toBe(1);
+    expect($paginator->hasPages())->toBeFalse();
+    expect($paginator->hasMorePages())->toBeFalse();
+    expect($paginator->items())->toBeEmpty();
+});
 
-    public function test_length_aware_paginator_set_correct_information_with_no_items() {
-        $paginator = new Paginator([], 0, 2, 1);
+test('length aware paginator is on first and last page', function () {
+    $paginator = new Paginator(['1', '2', '3', '4'], 4, 2, 2);
 
-        $this->assertEquals(1, $paginator->lastPage());
-        $this->assertEquals(1, $paginator->currentPage());
-        $this->assertFalse($paginator->hasPages());
-        $this->assertFalse($paginator->hasMorePages());
-        $this->assertEmpty($paginator->items());
-    }
+    expect($paginator->onLastPage())->toBeTrue();
+    expect($paginator->onFirstPage())->toBeFalse();
 
-    public function test_length_aware_paginatoris_on_first_and_last_page() {
-        $paginator = new Paginator(['1', '2', '3', '4'], 4, 2, 2);
+    $paginator = new Paginator(['1', '2', '3', '4'], 4, 2, 1);
 
-        $this->assertTrue($paginator->onLastPage());
-        $this->assertFalse($paginator->onFirstPage());
+    expect($paginator->onLastPage())->toBeFalse();
+    expect($paginator->onFirstPage())->toBeTrue();
+});
 
-        $paginator = new Paginator(['1', '2', '3', '4'], 4, 2, 1);
+test('length aware paginator can generate urls', function () {
+    $this->p->setPath('http://website.com');
+    $this->p->setPageName('foo');
 
-        $this->assertFalse($paginator->onLastPage());
-        $this->assertTrue($paginator->onFirstPage());
-    }
+    expect($this->p->path())->toBe('http://website.com');
 
-    public function test_length_aware_paginator_can_generate_urls() {
-        $this->p->setPath('http://website.com');
-        $this->p->setPageName('foo');
+    expect($this->p->url($this->p->currentPage()))->toBe('http://website.com?foo=2');
 
-        $this->assertSame(
-            'http://website.com',
-            $this->p->path()
-        );
+    expect($this->p->url($this->p->currentPage() - 1))->toBe('http://website.com?foo=1');
 
-        $this->assertSame(
-            'http://website.com?foo=2',
-            $this->p->url($this->p->currentPage())
-        );
+    expect($this->p->url($this->p->currentPage() - 2))->toBe('http://website.com?foo=1');
+});
 
-        $this->assertSame(
-            'http://website.com?foo=1',
-            $this->p->url($this->p->currentPage() - 1)
-        );
+test('length aware paginator can generate urls with query', function () {
+    $this->p->setPath('http://website.com?sort_by=date');
+    $this->p->setPageName('foo');
 
-        $this->assertSame(
-            'http://website.com?foo=1',
-            $this->p->url($this->p->currentPage() - 2)
-        );
-    }
+    expect($this->p->url($this->p->currentPage()))->toBe('http://website.com?sort_by=date&foo=2');
+});
 
-    public function test_length_aware_paginator_can_generate_urls_with_query() {
-        $this->p->setPath('http://website.com?sort_by=date');
-        $this->p->setPageName('foo');
+test('length aware paginator can generate urls without trailing slashes', function () {
+    $this->p->setPath('http://website.com/test');
+    $this->p->setPageName('foo');
 
-        $this->assertSame(
-            'http://website.com?sort_by=date&foo=2',
-            $this->p->url($this->p->currentPage())
-        );
-    }
+    expect($this->p->url($this->p->currentPage()))->toBe('http://website.com/test?foo=2');
 
-    public function test_length_aware_paginator_can_generate_urls_without_trailing_slashes() {
-        $this->p->setPath('http://website.com/test');
-        $this->p->setPageName('foo');
+    expect($this->p->url($this->p->currentPage() - 1))->toBe('http://website.com/test?foo=1');
 
-        $this->assertSame(
-            'http://website.com/test?foo=2',
-            $this->p->url($this->p->currentPage())
-        );
+    expect($this->p->url($this->p->currentPage() - 2))->toBe('http://website.com/test?foo=1');
+});
 
-        $this->assertSame(
-            'http://website.com/test?foo=1',
-            $this->p->url($this->p->currentPage() - 1)
-        );
+test('length aware paginator correctly generate urls with query and spaces', function () {
+    $this->p->setPath('http://website.com?key=value%20with%20spaces');
+    $this->p->setPageName('foo');
 
-        $this->assertSame(
-            'http://website.com/test?foo=1',
-            $this->p->url($this->p->currentPage() - 2)
-        );
-    }
+    expect($this->p->url($this->p->currentPage()))->toBe('http://website.com?key=value%20with%20spaces&foo=2');
+});
 
-    public function test_length_aware_paginator_correctly_generate_urls_with_query_and_spaces() {
-        $this->p->setPath('http://website.com?key=value%20with%20spaces');
-        $this->p->setPageName('foo');
-
-        $this->assertSame(
-            'http://website.com?key=value%20with%20spaces&foo=2',
-            $this->p->url($this->p->currentPage())
-        );
-    }
-
-    public function test_it_retrieves_the_paginator_options() {
-        $this->assertSame($this->options, $this->p->getOptions());
-    }
-}
+test('it retrieves the paginator options', function () {
+    expect($this->p->getOptions())->toBe($this->opts);
+});

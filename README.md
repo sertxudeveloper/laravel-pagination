@@ -3,7 +3,7 @@
 
 # Opinionated custom Laravel pagination
 
-![](https://img.shields.io/github/v/release/sertxudeveloper/laravel-pagination) ![](https://github.com/sertxudeveloper/laravel-pagination/actions/workflows/run-tests.yml/badge.svg) ![](https://img.shields.io/github/license/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/repo-size/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/issues/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/php-v/sertxudeveloper/laravel-pagination) [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-pagination)](https://app.codecov.io/gh/sertxudeveloper/laravel-pagination)
+![](https://img.shields.io/github/v/release/sertxudeveloper/laravel-pagination) ![](https://github.com/sertxudeveloper/laravel-pagination/actions/workflows/tests.yml/badge.svg) ![](https://img.shields.io/github/license/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/repo-size/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/github/issues/sertxudeveloper/laravel-pagination) ![](https://img.shields.io/packagist/php-v/sertxudeveloper/laravel-pagination) [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-pagination)](https://app.codecov.io/gh/sertxudeveloper/laravel-pagination)
 
 This package modifies the default Laravel pagination to make it smaller when a lot of pages are available.
 
