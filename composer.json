@@ -1,11 +1,7 @@
 {
     "name": "sertxudeveloper/laravel-pagination",
     "description": "Package for overriding Laravel's default pagination",
-    "keywords": [
-        "sertxudeveloper",
-        "laravel",
-        "laravel-pagination"
-    ],
+    "keywords": ["laravel", "pagination"],
     "homepage": "https://github.com/sertxudeveloper/laravel-pagination",
     "license": "MIT",
     "authors": [
@@ -18,12 +14,14 @@
     "require": {
         "php": "^8.2 || ^8.3 || ^8.4 || ^8.5",
         "illuminate/contracts": "^11.0 || ^12.0 || ^13.0",
-        "illuminate/database": "^11.0 || ^12.0 || ^13.0",
         "illuminate/support": "^11.0 || ^12.0 || ^13.0"
     },
     "require-dev": {
+        "laravel/pint": "^1.29",
         "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
-        "phpunit/phpunit": "^12.0 || ^13.0"
+        "pestphp/pest": "^3.0 || ^4.0",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -37,11 +35,15 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "vendor/bin/pest",
+        "test:coverage": "vendor/bin/pest --coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+          "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
